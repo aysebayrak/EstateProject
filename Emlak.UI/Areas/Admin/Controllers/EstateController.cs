@@ -21,7 +21,7 @@ namespace Emlak.UI.Areas.Admin.Controllers
             var username = HttpContext.Session.GetString("UserName");
             ViewBag.userName = username;
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:44364/api/Estate/getall");
+            var responseMessage = await client.GetAsync("https://localhost:7196/api/Estate/getall");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -33,6 +33,7 @@ namespace Emlak.UI.Areas.Admin.Controllers
         }
 
 
+
         [HttpGet]
         public async Task<IActionResult> AddEstate()
         {
@@ -40,7 +41,6 @@ namespace Emlak.UI.Areas.Admin.Controllers
             ViewBag.userName = username;
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> AddEstate(Estate estate)
         {
@@ -55,7 +55,7 @@ namespace Emlak.UI.Areas.Admin.Controllers
             var httpContent = new ByteArrayContent(Encoding.UTF8.GetBytes(jsonDocument.ToString()));
             httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var client = new HttpClient();
-            var responseMessage = await client.PostAsync("https://localhost:44364/api/Estate/add", httpContent);
+            var responseMessage = await client.PostAsync("https://localhost:7196/api/Estate/add", httpContent);
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -71,7 +71,7 @@ namespace Emlak.UI.Areas.Admin.Controllers
 
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:44364/api/Estate/get?id={id}");
+            var responseMessage = await client.GetAsync($"https://localhost:7196/api/Estate/get?id={id}");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -92,7 +92,7 @@ namespace Emlak.UI.Areas.Admin.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(estate);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync($"https://localhost:44364/api/Estate/update?id={estate.EstateID}", stringContent);
+            var responseMessage = await client.PutAsync($"https://localhost:7196/api/Estate/update?id={estate.EstateID}", stringContent);
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -105,7 +105,7 @@ namespace Emlak.UI.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteEstate(string id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync($"https://localhost:44364/api/Estate/delete?id={id}");
+            var responseMessage = await client.DeleteAsync($"https://localhost:7196/api/Estate/delete?id={id}");
 
             if (responseMessage.IsSuccessStatusCode)
             {

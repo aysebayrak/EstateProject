@@ -25,7 +25,7 @@ namespace Emlak.UI.Controllers
         public async Task<IActionResult> Index(User user1)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:44364/api/User/getall");
+            var responseMessage = await client.GetAsync("https://localhost:7196/api/User/getall");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();

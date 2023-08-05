@@ -30,6 +30,8 @@ namespace Emlak.Entity.Concrete
 
         //[BsonElement("room")]
         public int Room { get; set; }
+        //[BsonElement("userName")]
+        public string UserName { get; set; }
 
 
     }

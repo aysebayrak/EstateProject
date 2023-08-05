@@ -29,7 +29,7 @@ namespace Emlak.UI.Controllers
                 var client = _httpClientFactory.CreateClient();
                 var JsonData = JsonConvert.SerializeObject(userCreate);
                 StringContent content = new StringContent(JsonData, Encoding.UTF8, "application/json");
-                var responseMessage = await client.PostAsync("https://localhost:44364/api/User/add", content);
+                var responseMessage = await client.PostAsync("https://localhost:7196/api/User/add", content);
 
                 if (responseMessage.IsSuccessStatusCode)
                 {
